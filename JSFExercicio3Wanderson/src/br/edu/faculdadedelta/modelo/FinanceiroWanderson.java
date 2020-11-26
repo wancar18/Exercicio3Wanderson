@@ -91,7 +91,11 @@ public class FinanceiroWanderson {
 	
 	
 	public double getValorTotal() {
-		return valorProc * quantidadeExame;
+			if(valorProc>2000) {
+			return (valorProc * quantidadeExame)-((valorProc * quantidadeExame)*0.015);
+		}else {
+			return valorProc * quantidadeExame;
+		}
 	}
 
 	@Override

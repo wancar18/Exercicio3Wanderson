@@ -11,7 +11,7 @@
 
 <h:body>
 	<h:form>
-		<h:commandLink value="Lista" action="cadastroProcedimento.xhtml" immediate="true" />
+		<h:commandLink value="Cadastro de Procedimentos" action="cadastroProcedimento.xhtml" immediate="true" />
 		<h1>Lista de Procedimentos</h1>
 		<h:messages />
 		<h:dataTable border="1" value="#{financeiroController.lista}" var="proc">
@@ -77,7 +77,7 @@
 				<h:commandButton value="Editar" action="#{financeiroController.editar}">
 					<f:setPropertyActionListener value="#{proc}" target="#{financeiroController.financ}" />
 				</h:commandButton>
-				<h:commandButton value="Excluir" action="#{financeiroController.excluir}">
+				<h:commandButton value="Excluir" action="#{financeiroController.excluir}" onclick="return confirm('Confirma a exclusão ?')">
 					<f:setPropertyActionListener value="#{proc}" target="#{financeiroController.financ}" />
 				</h:commandButton>
 			</h:column>

@@ -11,7 +11,7 @@
 
 <h:body>
 	<h:form>
-	<h:commandLink value="Lista" action="listarProcedimento.xhtml" immediate="true" />
+	<h:commandLink value="Mostrar Procedimentos" action="listarProcedimento.xhtml" immediate="true" />
 		<h1>Cadastro de serviços</h1>
 		<h:messages />
 		<h:panelGrid columns="2">
@@ -33,18 +33,22 @@
 			<h:inputText value="#{financeiroController.financ.dataFim}"
 				required="true"
 				requiredMessage="Data fim do procedimento é obrigatoria!">
-				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />	
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
 			</h:inputText>
 
 			<h:outputText value="Paciente: *" />
 			<h:inputText value="#{financeiroController.financ.paciente}"
 				required="true"
-				requiredMessage="Obrigatorio informar o nome do paciente!"/>
+				requiredMessage="Obrigatorio informar o nome do paciente!">
+				<f:validateLength maximum="30"/>
+				</h:inputText>
 			
 			<h:outputText value="Quantidade de exame: *" />
 			<h:inputText value="#{financeiroController.financ.quantidadeExame}"
 				required="true"
-				requiredMessage="Favor informar a quantidade de exames!"/>
+				requiredMessage="Favor informar a quantidade de exames!">
+				<f:validateLongRange minimum="1" maximum="100"/>
+				</h:inputText>
 
 			<h:outputText value="Valor do procedimento: *" />
 			<h:inputText value="#{financeiroController.financ.valorProc}"
