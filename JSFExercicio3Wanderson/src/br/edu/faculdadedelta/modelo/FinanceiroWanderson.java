@@ -88,6 +88,11 @@ public class FinanceiroWanderson {
 	public void setValorProc(Double valorProc) {
 		this.valorProc = valorProc;
 	}
+	
+	
+	public double getValorTotal() {
+		return valorProc * quantidadeExame;
+	}
 
 	@Override
 	public int hashCode() {

@@ -62,7 +62,7 @@ public class FinanceiroDAO {
 		Conexao.fecharConexao(ps, conn, null);
 	}
 	
-	public List <FinanceiroWanderson> listar() throws ClassNotFoundException, SQLException {
+	public static List <FinanceiroWanderson> listar() throws ClassNotFoundException, SQLException {
 		Connection conn = Conexao.conectarNoBanco();
 		String sql = "SELECT id_procedimento, paciente_desc, procedimento_desc, valor_procedimento, "
 				+ "data_inicio_procedimento, data_fim_procedimento, quantidade_exame_procedimento"

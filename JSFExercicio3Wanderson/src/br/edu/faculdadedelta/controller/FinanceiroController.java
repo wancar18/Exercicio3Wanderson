@@ -1,15 +1,22 @@
 package br.edu.faculdadedelta.controller;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
 
 import br.edu.faculdadedelta.dao.FinanceiroDAO;
 import br.edu.faculdadedelta.modelo.FinanceiroWanderson;
+
+
+@ManagedBean
+@SessionScoped
 
 public class FinanceiroController {
 
@@ -18,10 +25,8 @@ public class FinanceiroController {
 	
 	private Date dataInicio;
 	private Date dataFim;
-	private Date dataLimite;
-	
-	private List<FinanceiroWanderson> listaProcedimento = new ArrayList<>();
-	
+
+		
 	private static final String PAGINA_CADASTRO = "cadastroProcedimento.xhtml"; 
 	private static final String PAGINA_LISTA = "listarProcedimento.xhtml";
 	
@@ -62,8 +67,7 @@ public class FinanceiroController {
 	public String salvar() {
 		
 		try {
-			if(financ.getDataInicio().after(new Date()) && financ.getDataInicio().before(dataLimite)
-					&& financ.getDataInicio().before(dataFim)) {
+			if(financ.getDataInicio().after(new Date()) /*&& financ.getDataFim().after(dataInicio)*/) {
 				if(financ.getId()==null) {
 					dao.incluir(financ);
 						exibirMensagem("Inclusão realizada com Sucesso!");
@@ -83,6 +87,20 @@ public class FinanceiroController {
 		return PAGINA_CADASTRO;
 	}
 	
+	
+	public List<FinanceiroWanderson> getLista() {
+		List<FinanceiroWanderson> listaRetorno = new ArrayList<FinanceiroWanderson>();
+		try {
+			listaRetorno = FinanceiroDAO.listar();
+		} catch (ClassNotFoundException | SQLException e) {
+			exibirMensagem("Erro ao realizar a operação. "
+					+ "Tente novamente mais tarde. " + e.getMessage());
+			e.printStackTrace();
+		}
+		return listaRetorno;
+	}
+	
+	
 	public String editar() {
 		return PAGINA_CADASTRO;
 	}
@@ -99,8 +117,6 @@ public class FinanceiroController {
 		return PAGINA_LISTA;
 	}
 	
-	public List<FinanceiroWanderson> getListaProcedimento(){
-		return listaProcedimento;
-	}
+
 	
 }
